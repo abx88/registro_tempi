@@ -45,6 +45,8 @@ input_lavorazione = st.text_input("stringa lavorazione", key=input_text_key, val
 if input_lavorazione:
     on_text_input_change(input_lavorazione)
 
+del st.session_state.stringa_lav
+
 st.dataframe(st.session_state.lista_lav, use_container_width=True)
 
 for the_keys in st.session_state.keys():
