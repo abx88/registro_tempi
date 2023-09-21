@@ -15,7 +15,7 @@ if reset_session_state:
     for key in st.session_state.keys():
         del st.session_state[key]
         
-cancella_stringa = st.button("cancella text box")
+cancella_stringa = st.button("cancella text box", key= 'canc')
 if cancella_stringa:
     del st.session_state['stringa_lav']       
 
@@ -27,6 +27,9 @@ if 'lista_lav' not in st.session_state:
 
 if 'contatore' not in st.session_state:
     st.session_state.contatore = 0
+
+if 'canc' not in st.session_state:
+    st.session_state.canc = True
     
     
 
@@ -44,7 +47,7 @@ def on_text_input_change(text):
  
    
     
-input_lavorazione = st.text_input("stringa lavorazione")
+input_lavorazione = st.text_input("stringa lavorazione", key='stringa_lav')
 
 
 if input_lavorazione:
