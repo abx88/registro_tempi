@@ -34,10 +34,8 @@ def on_text_input_change(text):
     n=st.session_state.contatore
     st.session_state.lista_lav.append((n, text, ora))
 
-df = pd.DataFrame(columns=('id','stringa','ora')
-
-st.dataframe(df)
-                  #st.data_editor(df, num_rows = "dynamic")
+df = pd.DataFrame(columns=('id','stringa','ora'))
+st.data_editor(df, num_rows = "dynamic")
  
    
     
