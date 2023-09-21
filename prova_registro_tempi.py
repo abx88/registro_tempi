@@ -32,7 +32,6 @@ if 'contatore' not in st.session_state:
 
     
 def on_text_input_change(text):
-    del st.session_state['stringa_lav'] 
     ora = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     st.session_state.contatore+=1
     n=st.session_state.contatore
@@ -45,18 +44,14 @@ def on_text_input_change(text):
  
    
     
-input_lavorazione = st.text_input("stringa lavorazione", key='stringa_lav')
+input_lavorazione = st.text_input("stringa lavorazione")
 
 
 if input_lavorazione:
     on_text_input_change(input_lavorazione)
     
 
-st.session_state.stringa_lav = ''
-
-
-    
-
+ 
 st.dataframe(st.session_state.lista_lav, use_container_width=True) 
 
 #del st.session_state.stringa_lav   
