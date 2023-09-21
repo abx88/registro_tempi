@@ -28,7 +28,7 @@ if 'contatore' not in st.session_state:
 
 lista_lavorazione = []
 
-lista_lavorazione = st.session_state
+st.session_state = lista_lavorazione
 
 def on_text_input_change(text):
     ora = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
