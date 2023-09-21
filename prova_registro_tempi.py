@@ -32,11 +32,11 @@ if 'contatore' not in st.session_state:
 
     
 def on_text_input_change(text):
+    del st.session_state['stringa_lav'] 
     ora = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     st.session_state.contatore+=1
     n=st.session_state.contatore
     st.session_state.lista_lav.append((n, text, ora))
-    del st.session_state['stringa_lav'] 
     
 
 
