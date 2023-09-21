@@ -18,7 +18,7 @@ if reset_session_state:
         
  
 if 'stringa_lav' not in st.session_state:
-    st.session_state.stringa_lav = ""
+    st.session_state.stringa_lav = 0
     
 if 'lista_lav' not in st.session_state:
     st.session_state.lista_lav = []
