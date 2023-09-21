@@ -10,14 +10,6 @@ import datetime as dt
 
 
 
-reset_session_state = st.button("reset session state")
-if reset_session_state:
-    for key in st.session_state.keys():
-        del st.session_state[key]
-        
-cancella_stringa = st.button("cancella text box")
-if cancella_stringa:
-    del st.session_state['stringa_lav']       
 
 if 'stringa_lav' not in st.session_state:
     st.session_state.stringa_lav = ""
