@@ -30,7 +30,9 @@ if 'contatore' not in st.session_state:
 
 if 'canc' not in st.session_state:
     st.session_state.canc = False
-    
+
+if 'input_text' not in st.session_state:
+    st.session_state.input_text = ""
     
 
     
@@ -39,7 +41,7 @@ def on_text_input_change(text):
     st.session_state.contatore+=1
     n=st.session_state.contatore
     st.session_state.lista_lav.append((n, text, ora))
-    st.session_state.stringa_lav = ""
+    st.session_state.input_text = ""
 
 
     
