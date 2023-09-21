@@ -34,16 +34,14 @@ def on_text_input_change(text):
     n=st.session_state.contatore
     st.session_state.lista_lav.append((n, text, ora))
 
-df = pd.DataFrame(columns=('stringa'))
-de = st.data_editor(df, use_container_width = True , num_rows = "dynamic")
- 
+
    
     
-input_lavorazione = st.text_input("stringa lavorazione", key='stringa_lav')
+input_lavorazione = st.text_area("stringa lavorazione", key='stringa_lav')
 
 
-if de:
-    on_text_input_change(de)
+if input_lavorazionee:
+    on_text_input_change(input_lavorazione)
    
     
 st.dataframe(st.session_state.lista_lav, use_container_width=True) 
