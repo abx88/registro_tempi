@@ -43,4 +43,4 @@ if input_lavorazione:
     on_text_input_change(input_lavorazione)
    
     
-st.dataframe(st.session_state.lista_lav, use_container_width=True) 
+st.dataframe(st.session_state, use_container_width=True) 
