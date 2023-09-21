@@ -20,10 +20,10 @@ cancella_stringa = st.button("cancella text box")
 if cancella_stringa:
     del st.session_state['stringa_lav']       
 
-if 'stringa_lav' not in st.session_state.stringa_lav:
+if 'stringa_lav' not in st.session_state:
     st.session_state.stringa_lav = ""
     
-if 'lista_lav' not in st.session_state.lista_lav:
+if 'lista_lav' not in st.session_state:
     st.session_state.lista_lav = []
 
 #st.session_state.lista_lav = []
