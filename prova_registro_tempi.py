@@ -62,6 +62,7 @@ st.dataframe(st.session_state.lista_lav, use_container_width=True)
 
 for the_keys in st.session_state.keys():
     st.write(the_keys)
+"queste sono sessioni"
 
 st.write(st.session_state.stringa_lav)
 st.write(st.session_state.lista_lav)
