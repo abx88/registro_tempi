@@ -42,7 +42,7 @@ def on_text_input_change(text):
    
     
 input_lavorazione = st.text_input("stringa lavorazione", key='stringa_lav')
-
+lista_lavorazione = st.session_state
 if input_lavorazione:
     on_text_input_change(input_lavorazione)
    
