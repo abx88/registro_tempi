@@ -52,24 +52,11 @@ input_lavorazione = st.text_input("stringa lavorazione", key='stringa_lav')
 
 if input_lavorazione:
     on_text_input_change(input_lavorazione)
-    st.session_state.aa = ''
-
+    
  
 st.dataframe(st.session_state.lista_lav, use_container_width=True) 
 
-#del st.session_state.stringa_lav   
-#st.dataframe(st.session_state, use_container_width=True) 
 
 for the_keys in st.session_state.keys():
     st.write(the_keys)
-"queste sono sessioni"
-
-st.write(st.session_state.stringa_lav)
-st.write(st.session_state.lista_lav)
-st.write(st.session_state.contatore)
-
-#st.write(st.session_state.lista)
-
-#del st.session_state['stringa_lav']
-#st.write(lista_lavorazioni)
     
