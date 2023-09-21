@@ -47,7 +47,7 @@ def on_text_input_change(text):
  
    
     
-input_lavorazione = st.text_input("stringa lavorazione", key='aa')
+input_lavorazione = st.text_input("stringa lavorazione", key='stringa_lav')
 
 
 if input_lavorazione:
