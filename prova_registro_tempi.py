@@ -60,8 +60,8 @@ st.dataframe(st.session_state.lista_lav, use_container_width=True)
 #del st.session_state.stringa_lav   
 #st.dataframe(st.session_state, use_container_width=True) 
 
-for the_value in st.session_state.values:
-    st.write(the_value)
+for the_values in st.session_state.values:
+    st.write(the_values)
 
 st.write(st.session_state.stringa_lav)
 st.write(st.session_state.lista_lav)
