@@ -35,7 +35,7 @@ def on_text_input_change(text):
     st.session_state.lista_lav.append((n, text, ora))
 
 df = pd.DataFrame(columns=('id','stringa','ora'))
-st.data_editor(df, num_rows = "dynamic")
+st.data_editor(df, use_container_width = True , num_rows = "dynamic")
  
    
     
