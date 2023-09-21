@@ -35,7 +35,7 @@ def on_text_input_change(text):
     st.session_state.lista_lav.append((n, text, ora))
 
 df = pd.DataFrame(columns=('stringa', 'id','ora'))
-st.data_editor(df, use_container_width = True , num_rows = "dynamic")
+de = st.data_editor(df, use_container_width = True , num_rows = "dynamic")
  
    
     
@@ -43,7 +43,8 @@ input_lavorazione = st.text_input("stringa lavorazione", key='stringa_lav')
 
 
 if input_lavorazione:
-    on_text_input_change(input_lavorazione)
+    on_text_input_change(de)
+    de['stringa']= st.session_state.stringa_lav
 
     
 st.dataframe(st.session_state.lista_lav, use_container_width=True) 
