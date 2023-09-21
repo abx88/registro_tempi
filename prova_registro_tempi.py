@@ -36,7 +36,8 @@ def on_text_input_change(text):
 
 df = pd.DataFrame(columns=('id','stringa','ora')
 
-st.data_editor(df, num_rows = "dynamic")
+st.dataframe(df)
+                  #st.data_editor(df, num_rows = "dynamic")
  
    
     
