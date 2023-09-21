@@ -21,6 +21,9 @@ if cancella_stringa:
 
 if 'stringa_lav' not in st.session_state:
     st.session_state.stringa_lav = ""
+
+if 'contatore' not in st.session_state:
+    st.session_state.contatore = 0
     
 
 lista_lavorazione = []
