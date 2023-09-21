@@ -36,6 +36,8 @@ def on_text_input_change(text):
     st.session_state.contatore+=1
     n=st.session_state.contatore
     st.session_state.lista_lav.append((n, text, ora))
+    del st.session_state['stringa_lav'] 
+    
 
 
 
