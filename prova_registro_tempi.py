@@ -26,13 +26,16 @@ if 'stringa_lav' not in st.session_state:
 if 'lista_lav' not in st.session_state:
     st.session_state.lista_lav = []
 
+if 'counter' not in st.session_state:
+    st.session_state.counter = 0
+
 #st.session_state.lista_lav = []
     
 def on_text_input_change(text):
     ora = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    st.session_state.lista_lav.append((text, ora))
-    st.session_state = st.session_state.lista_lav
-    #del st.session_state['stringa_lav']
+    id = st.session_state.counter +=1
+    st.session_state.lista_lav.append((id,text, ora))
+   #del st.session_state['stringa_lav']
  
    
     
