@@ -42,7 +42,7 @@ de = st.data_editor(df, use_container_width = True , num_rows = "dynamic")
 input_lavorazione = st.text_input("stringa lavorazione", key='stringa_lav')
 
 
-if input_lavorazione:
+if de:
     on_text_input_change(de)
    
     
