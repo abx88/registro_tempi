@@ -32,7 +32,8 @@ def on_text_input_change(text):
     st.session_state.contatore+=1
     n=st.session_state.contatore
     lista_lavorazione.append((n, text, ora))
-    st.session_state = lista_lavorazione
+    lista_lavorazione = st.session_state
+ 
 
 
    
