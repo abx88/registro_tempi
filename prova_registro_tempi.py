@@ -16,9 +16,7 @@ if reset_session_state:
     for key in st.session_state.keys():
         #del st.session_state[key]
         
-cancella_stringa = st.button("cancella text box")
-if cancella_stringa:
-    del st.session_state['stringa_lav']       
+ 
 
 if 'stringa_lav' not in st.session_state:
     st.session_state.stringa_lav = ""
@@ -44,7 +42,7 @@ input_lavorazione = st.text_input("stringa lavorazione", key='stringa_lav')
 
 if input_lavorazione:
     on_text_input_change(input_lavorazione)
-    cancella_stringa
+    
     
 st.dataframe(st.session_state.lista_lav, use_container_width=True) 
 
