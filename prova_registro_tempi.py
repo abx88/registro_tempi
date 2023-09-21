@@ -14,7 +14,7 @@ import datetime as dt
 reset_session_state = st.button("reset session state")
 if reset_session_state:
     for key in st.session_state.keys():
-        #del st.session_state[key]
+        del st.session_state[key]
         
  
 if 'stringa_lav' not in st.session_state:
