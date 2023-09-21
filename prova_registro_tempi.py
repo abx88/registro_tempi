@@ -22,17 +22,17 @@ if cancella_stringa:
 if 'stringa_lav' not in st.session_state:
     st.session_state.stringa_lav = ""
     
-if 'lista_lav' not in st.session_state:
-    st.session_state.lista_lav = []
 
-if 'contatore' not in st.session_state:
-    st.session_state.contatore = 0
-      
+lista_lavorazione = []
+
+lista_lavorazione = st.session_state
+
 def on_text_input_change(text):
     ora = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     st.session_state.contatore+=1
     n=st.session_state.contatore
-    st.session_state.lista_lav.append((n, text, ora))
+    lista_lavorazione.append((n, text, ora))
+    st.session_state = lista_lavorazione
 
 
    
