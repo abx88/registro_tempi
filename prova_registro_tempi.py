@@ -39,7 +39,6 @@ def on_text_input_change(text):
     
 input_lavorazione = st.text_area("stringa lavorazione", key='stringa_lav')
 
-
 if input_lavorazione:
     on_text_input_change(input_lavorazione)
    
