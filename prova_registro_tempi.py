@@ -47,12 +47,12 @@ def on_text_input_change(text):
  
    
     
-input_lavorazione = st.text_input("stringa lavorazione", key='stringa_lav')
+input_lavorazione = st.text_input("stringa lavorazione", key='aa')
 
 
 if input_lavorazione:
     on_text_input_change(input_lavorazione)
-    
+    st.session_state.aa = ''
 
  
 st.dataframe(st.session_state.lista_lav, use_container_width=True) 
