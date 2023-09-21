@@ -29,7 +29,7 @@ if 'contatore' not in st.session_state:
     st.session_state.contatore = 0
 
 if 'canc' not in st.session_state:
-    st.session_state.canc = True
+    st.session_state.canc = False
     
     
 
