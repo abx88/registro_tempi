@@ -30,7 +30,8 @@ if 'counter' not in st.session_state:
     
 def on_text_input_change(text):
     ora = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    id = st.session_state.counter +=1
+    st.session_state.counter +=1
+    id = st.session_state.counter
     st.session_state.lista_lav.append((id,text, ora))
    #del st.session_state['stringa_lav']
  
