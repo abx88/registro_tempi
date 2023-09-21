@@ -17,7 +17,6 @@ if reset_session_state:
         #del st.session_state[key]
         
  
-
 if 'stringa_lav' not in st.session_state:
     st.session_state.stringa_lav = ""
     
