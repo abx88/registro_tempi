@@ -12,7 +12,8 @@ import datetime as dt
 def on_change_add(text):
     del st.session_state.stringa_lav
     ora = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    st.session_state.lista.append((text, ora))
+    text = agg
+    st.session_state.lista.append((agg, ora))
     
 if 'stringa_lav' not in st.session_state:
     st.session_state.stringa_lav = ""
