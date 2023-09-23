@@ -12,6 +12,7 @@ import datetime as dt
 def on_change_add(text):
     ora = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     st.session_state.lista.append((text, ora))
+    st.session_state.value = "Baz"
     
 if 'stringa_lav' not in st.session_state:
     st.session_state.stringa_lav = ""
@@ -34,6 +35,6 @@ st.dataframe(st.session_state.lista, use_container_width=True)
 container = st.container()
 
 if st.button("Baz"):
-    st.session_state.value = "Baz"
+   
 
 container.header(st.session_state.value)
