@@ -8,35 +8,20 @@ import pandas as pd
 import numpy as np
 import datetime as dt
 
-
-
-
 if 'stringa_lav' not in st.session_state:
     st.session_state.stringa_lav = ""
-
-if 'contatore' not in st.session_state:
-    st.session_state.contatore = 0
     
+if 'lista' not in st.session_state:
+    st.session_state.lista = []
 
-lista_lavorazione = []
-
-st.session_state = lista_lavorazione
-
-def on_text_input_change(text):
+def on_change_add(text_input):
     ora = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    st.session_state.contatore+=1
-    n=st.session_state.contatore
-    lista_lavorazione.append((n, text, ora))
-    lista_lavorazione = st.session_state
- 
-
-
-   
+    text = text_input
+    st.session_state.lista_lav.append((text, ora))
     
 input_lavorazione = st.text_input("stringa lavorazione", key='stringa_lav')
-lista_lavorazione = st.session_state
+
 if input_lavorazione:
     on_text_input_change(input_lavorazione)
-   
     
-st.dataframe(st.session_state, use_container_width=True) 
+st.dataframe(st.session_state.lista, use_container_width=True) 
