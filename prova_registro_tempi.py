@@ -15,9 +15,8 @@ if 'lista' not in st.session_state:
     st.session_state.lista = []
 
 
-def on_change_add(text_in):
+def on_change_add(text):
     ora = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    text = text_in
     st.session_state.lista_lav.append((text, ora))
     
 input_lavorazione = st.text_input("stringa lavorazione", key='stringa_lav')
