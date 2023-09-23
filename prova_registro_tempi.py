@@ -14,6 +14,7 @@ if 'stringa_lav' not in st.session_state:
 if 'lista' not in st.session_state:
     st.session_state.lista = []
 
+
 def on_change_add(text_input):
     ora = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     text = text_input
