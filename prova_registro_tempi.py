@@ -39,4 +39,4 @@ if input_lavorazione:
 log_df = pd.DataFrame(st.session_state.lista_lav, columns=('ID', 'ingresso', 'data-ora'))
 
 #st.dataframe(st.session_state.lista_lav, use_container_width=True) 
-st.dataframe(log_df, use_container_width = Ture)
+st.dataframe(log_df, use_container_width = True)
