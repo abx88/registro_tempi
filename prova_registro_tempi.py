@@ -10,10 +10,11 @@ import datetime as dt
 
 
 def on_change_add(input_text):
+    del st.session_state.stringa_lav
     ora = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     text = input_text
     st.session_state.lista.append((text, ora))
-    del st.session_state.stringa_lav
+    
 
 
 
