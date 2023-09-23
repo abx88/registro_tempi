@@ -34,7 +34,5 @@ st.dataframe(st.session_state.lista, use_container_width=True)
 
 container = st.container()
 
-if st.button("Baz"):
-   
 
 container.header(st.session_state.value)
