@@ -17,6 +17,7 @@ def on_change_add(text):
     ora = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     st.session_state.lista.append((text, ora))
     st.session_state.value = "Baz"
+    st.session_state.stringa_lav = ""
     
 if 'stringa_lav' not in st.session_state:
     st.session_state.stringa_lav = ""
