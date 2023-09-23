@@ -36,5 +36,7 @@ if input_lavorazione:
     on_change_add(input_lavorazione)
     st.rerun()
 
-st.dataframe(st.session_state.lista_lav, use_container_width=True) 
+log_df = pd.DataFrame(st.session_state.lista_lav, columns=('ID', 'ingresso', 'data-ora'))
 
+#st.dataframe(st.session_state.lista_lav, use_container_width=True) 
+st.dataframe(log_df)
