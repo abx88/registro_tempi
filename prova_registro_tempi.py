@@ -17,7 +17,7 @@ def on_change_add(text):
     ora = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     st.session_state.contatore+=1
     n=st.session_state.contatore
-    st.session_state.lista.append((n, text, ora))
+    st.session_state.lista_lav.append((n, text, ora))
     del st.session_state.stringa_lav
     
     
