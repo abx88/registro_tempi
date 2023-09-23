@@ -25,7 +25,7 @@ if 'stringa_lav' not in st.session_state:
     st.session_state.stringa_lav = ""
     
 if 'lista_lav' not in st.session_state:
-    st.session_state.lista = []
+    st.session_state.lista_lav = []
 
 if 'contatore' not in st.session_state:
     st.session_state.contatore = 0
