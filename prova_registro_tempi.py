@@ -8,9 +8,10 @@ import pandas as pd
 import numpy as np
 import datetime as dt
 
-if st.button('reset'):
-for key in st.session_state.key():
-    del st.session_state.key()
+reset_session_state = st.button("reset session state")
+if reset_session_state:
+    for key in st.session_state.keys():
+        del st.session_state[key]
 
 def on_change_add(text):
     ora = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
