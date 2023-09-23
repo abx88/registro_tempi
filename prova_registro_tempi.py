@@ -26,3 +26,5 @@ input_lavorazione = st.text_input("stringa lavorazione", key='stringa_lav')
 
 if input_lavorazione:
     on_change_add(input_lavorazione)
+
+del st.session_state.stringa_lav
