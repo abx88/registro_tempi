@@ -16,6 +16,7 @@ def on_change_add(input_text):
     del st.session_state.stringa_lav
 
 
+
 if 'stringa_lav' not in st.session_state:
     st.session_state.stringa_lav = ""
     
