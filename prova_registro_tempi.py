@@ -21,9 +21,11 @@ def on_change_add(text):
     ingresso_1 = ingresso[1]
     ingresso_2 = ingresso[2]
     ingresso_3 = ingresso[3]
-    ora = dt.time.now().strftime("%H:%M:%S")
-    data = dt.date.now().strftime("%Y-%m-%d")
-    st.session_state.lista_lav.append((n, ingresso_0, ingresso_1, ingresso_2, ingresso_3, ora))
+    data_ora = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    data_ora.split(maxsplit=2)
+    ora = data_ora[1]
+    data = data_ora[0]
+    st.session_state.lista_lav.append((n, ingresso_0, ingresso_1, ingresso_2, ingresso_3, ora, data))
     del st.session_state.stringa_lav
     
     
