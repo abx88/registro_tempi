@@ -26,6 +26,8 @@ def on_change_add(text):
     ora = str(data_ora_split[1])
     data = str(data_ora_split[0])
     st.session_state.lista_lav.append((n, ingresso_0, ingresso_1, ingresso_2, ingresso_3, ora, data))
+    with open('registro_tempi.txt', 'w') as file:
+        file.write(st.session_state.stringa_lav)
     del st.session_state.stringa_lav
     
     
