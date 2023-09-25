@@ -18,7 +18,11 @@ def on_change_add(text):
     st.session_state.contatore+=1
     n=st.session_state.contatore
     ingresso = st.session_state.stringa_lav.split(maxsplit=4)
-    st.session_state.lista_lav.append((n, ingresso, ora))
+    ingresso_1 = ingresso[0]
+    ingresso_2 = ingresso[1]
+    ingresso_3 = ingresso[2]
+    ingresso_4 = ingresso[3]
+    st.session_state.lista_lav.append((n, ingresso_0, ingresso_1, ingresso_2, ingresso_3, ora))
     del st.session_state.stringa_lav
     
     
