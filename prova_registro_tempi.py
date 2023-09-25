@@ -14,7 +14,6 @@ if reset_session_state:
         del st.session_state[key]
 
 def on_change_add(text):
-    ora = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     st.session_state.contatore+=1
     n=st.session_state.contatore
     ingresso = st.session_state.stringa_lav.split(maxsplit=4)
@@ -22,6 +21,8 @@ def on_change_add(text):
     ingresso_1 = ingresso[1]
     ingresso_2 = ingresso[2]
     ingresso_3 = ingresso[3]
+    ora = dt.time.now().strftime("%H:%M:%S")
+    data = dt.date.now().strftime("%Y-%m-%d")
     st.session_state.lista_lav.append((n, ingresso_0, ingresso_1, ingresso_2, ingresso_3, ora))
     del st.session_state.stringa_lav
     
@@ -41,7 +42,7 @@ if input_lavorazione:
     on_change_add(input_lavorazione)
     st.rerun()
 
-log_df = pd.DataFrame(st.session_state.lista_lav, columns=('ID', 'lotto', 'macchina', 'start/stop', 'op', 'data-ora'))
+log_df = pd.DataFrame(st.session_state.lista_lav, columns=('ID', 'lotto', 'macchina', 'inizio/fine', 'op', 'ora', 'data'))
 
 #st.dataframe(st.session_state.lista_lav, use_container_width=True) 
 st.dataframe(log_df, use_container_width = True)
