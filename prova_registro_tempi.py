@@ -32,7 +32,7 @@ if 'contatore' not in st.session_state:
     
 input_lavorazione = st.text_input("stringa lavorazione", key='stringa_lav')
 
-if input_lavorazione == "":
+if input_lavorazione:
     on_change_add(input_lavorazione)
     st.rerun()
 
