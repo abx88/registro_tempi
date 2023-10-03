@@ -12,93 +12,54 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import datetime as dt
+import os
 
 st.set_page_config(
-    page_title="RegistroTempi",
+    page_title="AnalisiTempi",
     layout="wide")
+st.header("Analisi tempi lavorazione cuccanza")
 
-st.header("Registro Tempi lavorazione")
+expander_registro = st.expander("log_tempi_registrati")
 
-reset_session_state = st.button("reset session state")
-if reset_session_state:
-    for key in st.session_state.keys():
-        del st.session_state[key]
+nome_file = "C:\\Users\\Andrea\\Documents\\PythonScripts\\BackupTempi.txt"
+registro_tempi = pd.read_csv(nome_file, delimiter='\,')
+registro_tempi_mod = expander_registro.data_editor(registro_tempi, use_container_width = True)
+registro_tempi_mod['ora'] = pd.to_datetime(registro_tempi_mod['ora'], format='%H:%M:%S')
 
-def on_change_add(text):
-    st.session_state.contatore+=1
-    n=st.session_state.contatore
-    ingresso = st.session_state.stringa_lav.split()
-    n_split = len(ingresso)
-    if n_split == 4:
-        ingresso_0 = ingresso[0]
-        ingresso_1 = ingresso[1]
-        ingresso_2 = ingresso[2]
-        ingresso_3 = ingresso[3]
-        ingresso_4 = "no_errori"
-    if n_split >4:
-        ingresso_0 = ""
-        ingresso_1 = ""
-        ingresso_2 = ""
-        ingresso_3 = ""
-        ingresso_4 = str(ingresso)
-    if n_split <4:
-        ingresso_0 = ""
-        ingresso_1 = ""
-        ingresso_2 = ""
-        ingresso_3 = ""
-        ingresso_4 = str(ingresso)
-    data_ora = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    data_ora_split = data_ora.split(" ")
-    ora = str(data_ora_split[1])
-    data = str(data_ora_split[0])
-    lotto_ora = str(ingresso_0)+" "+ora + " " + str(ingresso_2)
-    st.session_state.lista_lav.append((n, ingresso_0, ingresso_1, ingresso_2, ingresso_3, ingresso_4, ora, data, lotto_ora))
-    #procedura backup stringa\
-    nome_file = "C:\\Users\\Andrea\\Documents\\PythonScripts\\BackupTempi.txt"
-    with open(nome_file, "a") as file:
-        file.write(str(n) + " "
-                   + str(ingresso_0)+ "," 
-                   + str(ingresso_1)+ "," 
-                   + str(ingresso_2)+ "," 
-                   + str(ingresso_3)+ "," 
-                   + str(ingresso_4) + ","
-                   + ora +","+ data + "\n")
-        #cancellazione text input
-    del st.session_state.stringa_lav
-    
-
+# Funzioni per esportare il DataFrame come file di testo
 def converti_df(df):
     return df.to_csv().encode('utf-8')
 
-      
+def converti_df_senza_int(df):
+    return df.to_csv(index=False, header=False, sep=';').encode('utf-8')
+
+
+def export_to_text(df, destination_folder, file_name):
+    # Esporta il DataFrame come un file CSV (Comma-Separated Values)
+    csv_file_path = os.path.join(destination_folder, file_name + '.csv')
+    df.to_csv(csv_file_path, sep=',', index=False)  # Utilizza il separatore '\t' per il file di testo
+    txt_file_path = os.path.join(destination_folder, file_name + '.txt')
+    os.rename(csv_file_path, txt_file_path)
+
+    return txt_file_path
+
+destination_folder = "C:\\Users\\Andrea\\Documents\\PythonScripts\\"
+if st.button("Esporta DataFrame"):
+    file_name = "BackupTempi_agg"
+    txt_file_path = export_to_text(registro_tempi_mod, destination_folder, file_name)
     
-if 'stringa_lav' not in st.session_state:
-    st.session_state.stringa_lav = ""
-    
-if 'lista_lav' not in st.session_state:
-    st.session_state.lista_lav = []
+#tabella controllo ultimo lotto per operatore/macchinario
+pivot_log = pd.pivot_table(registro_tempi_mod,  values=["lotto_ora"], index="macchina", columns="op", aggfunc='last')
 
-if 'contatore' not in st.session_state:
-    st.session_state.contatore = 0
-    
-input_lavorazione = st.text_input("stringa lavorazione", key='stringa_lav')
-
-if input_lavorazione:
-    on_change_add(input_lavorazione)
-    st.rerun()
-
-log_df = pd.DataFrame(st.session_state.lista_lav, columns=('ID', 'lotto', 'macchina', 'inizio_fine', 
-                                                           'op', 'errore', 'ora',  'data', 'lotto_ora'))
-
-pivot_log = pd.pivot_table(log_df,  values=["lotto_ora"], index="macchina", columns="op", aggfunc='last')
-controllo_lotti = pd.pivot_table(log_df,  values="ora", index=["data",  "lotto"], columns="inizio_fine", aggfunc='count')
+#tabella conteggio inizio/fine per lotto
+controllo_lotti = pd.pivot_table(registro_tempi_mod,  values="ora", 
+                                 index=["data",  "lotto"], columns="inizio_fine", aggfunc='count')
 controllo_lotti = controllo_lotti.sort_index(axis=1, ascending=False)
-track_lotti = pd.pivot_table(log_df,  values="ora", index=[ "data","op", "macchina","lotto","ID"], columns="inizio_fine", aggfunc='last')
+
+#track lotti inizio - fine
+track_lotti = pd.pivot_table(registro_tempi_mod,  values="ora", 
+                             index=[ "data","op", "macchina","lotto","ID"], columns="inizio_fine", aggfunc='last')
 track_lotti = track_lotti.sort_index(axis=1, ascending=False)
-
-
-#csv = converti_df(log_df)
-#scarica_file = st.download_button("download", data=csv, file_name="registro_tempi.csv", mime = 'text/csv')
 
 st.subheader("ultimo lotto in lavorazione per macchina/operatore con ora inserimento operazione")
 st.dataframe(pivot_log, use_container_width = True)
@@ -107,27 +68,64 @@ st.dataframe(pivot_log, use_container_width = True)
 col1, col2 = st.columns(2)
 col1.subheader("lotti in lavorazione inizio, fine (elenco)")
 col1.dataframe(track_lotti, use_container_width = True)
+
 csv = converti_df(track_lotti)
 scarica_file = st.download_button("download tracking", data=csv, file_name="track_tempi.csv", mime = 'text/csv')
 col2.subheader("conteggio q. inizio/fine per lotti")
 col2.dataframe(controllo_lotti, use_container_width = True)
 
 df_calcoli= track_lotti.reset_index()
+
 df_calcoli = df_calcoli.ffill(axis=0, inplace=False, limit=1)
 selezionarighe = st.toggle("seleziona righe pari")
 if selezionarighe == True:
     df_calcoli = df_calcoli[df_calcoli.index % 2 == 0]
 else:
     df_calcoli = df_calcoli[df_calcoli.index % 2 != 0]
-#df_calcoli['I'] = pd.to_datetime(df_calcoli['I'], format='%H:%M')
-#df_calcoli['F'] = pd.to_datetime(df_calcoli.F, format='%H:%M:%S')
-#df_calcoli['durata_op']=df_calcoli['F']-df_calcoli['I']    
 
+
+df_calcoli['tempo'] = (df_calcoli['F'] - df_calcoli['I']).dt.total_seconds() 
+   
 
 st.subheader("riepilogo tempi per lotto")
-csv = converti_df(df_calcoli)
-scarica_file = st.download_button("download riepilogo", data=csv, file_name="registro_tempi.csv", mime = 'text/csv')
 st.dataframe(df_calcoli, use_container_width = True)
 
-#st.dataframe(log_df, use_container_width = True)
+# Dizionario di mapping
+mapping_M = {'GR': '<M-GRAZIANO', 
+           'TO': '<M-TOVAGLIERI', 
+           'ME': '<M-MERLI',
+           'WI': '<M-WISCONSIN'}
 
+mapping_OP = {'DD': '<D-DANI', 
+           'CS': '<D-CONTINI', 
+           'MO': '<D-MORI',
+           'CA': '<D-CELA'}
+
+df_importazioni = df_calcoli
+df_importazioni['macchina_imp'] = df_importazioni['macchina'].map(mapping_M)
+df_importazioni['op_imp'] = df_importazioni['op'].map(mapping_OP)
+df_importazioni['tempo'] = (df_importazioni['F'] - df_importazioni['I']).dt.total_seconds() 
+
+df_importazioni_macchina = df_importazioni.drop(columns = ['ID','macchina','op','op_imp','data','I', 'F'])
+df_importazioni_macchina = df_importazioni_macchina[['lotto','macchina_imp','tempo']]
+df_importazioni_macchina['lotto'] = df_importazioni_macchina['lotto'].apply(lambda x: x.strip())
+df_importazioni_macchina['macchina_imp'] = df_importazioni_macchina['macchina_imp'].apply(lambda x: x.strip())
+
+
+df_importazioni_operatore = df_importazioni.drop(columns = ['ID','macchina','op','macchina_imp','data','I', 'F'])
+df_importazioni_operatore = df_importazioni_operatore[['lotto','op_imp','tempo']]
+df_importazioni_operatore['lotto'] = df_importazioni_operatore['lotto'].apply(lambda x: x.strip())
+df_importazioni_operatore['macchina_imp'] = df_importazioni_operatore['op_imp'].apply(lambda x: x.strip())
+#df_importazioni_totale = pd.concat([df_importazioni_macchina, df_importazioni_operatore], ignore_index=True)
+
+col1, col2 = st.columns(2)
+
+col1.subheader("export macchinari")
+col1.dataframe(df_importazioni_macchina, use_container_width = True)
+csv = converti_df_senza_int(df_importazioni_macchina)
+scarica_file_macchinari = col1.download_button("download riepilogo macchine", data=csv, file_name="export_macchine.csv", mime = 'text/csv')
+
+col2.subheader("export operatore")
+col2.dataframe(df_importazioni_operatore, use_container_width = True)
+csv = converti_df_senza_int(df_importazioni_operatore)
+scarica_file_operatore = col2.download_button("download riepilogo op", data=csv, file_name="export_op.csv", mime = 'text/csv')
